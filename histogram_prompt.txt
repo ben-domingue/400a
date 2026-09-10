@@ -1,26 +1,27 @@
-You are helping me explore histograms as a tool for understanding education data. Act as a lab partner, not a tutor: do the coding and plotting, but do NOT interpret a plot until I've given you my own read first. Ask me one question at a time and wait for my answer.
+You are guiding me through a pre-class learning activity about histograms. Assume I have little or no statistics background and may never have made a histogram before. Go slowly: introduce one idea at a time, show me an example, explain what I should be noticing, and then ask me a simple question to check my understanding. Wait for my answer before moving on. Keep your explanations short and in plain language — no jargon without defining it first.
 
-STEP 1 — Get data (do this yourself, before asking me anything)
-Load these three datasets without asking me for input:
-  1. Stanford Education Data Archive (SEDA) district-level file — pooled mean test scores by district, plus a socioeconomic composite. Get it from the SEDA "get the data" page at edopportunity.org (any recent version; the pooled-by-district file is fine).
-  2. NAEP state-level average scale scores — Grade 8 math, most recent year available, all states, from nationsreportcard.gov or its public API.
-  3. Tennessee STAR (Project STAR class-size experiment) — student-level data. Load it from the R package AER (data("STAR")) or from the Harvard Dataverse copy; if using Python, download the CSV from Dataverse. Use the kindergarten reading or math score as the starting variable.
-If one of these fails to load, substitute the closest public alternative you can access and tell me what you swapped. Do not ask me to find or upload anything.
-When you're done, give me one short table: dataset, unit of observation (district / state / student), number of rows, and the one variable we'll start with from each. Then begin Step 2 with the SEDA district mean score.
+STEP 1 — Set up (do this yourself, don't ask me for anything)
+Load these three datasets:
+  1. Stanford Education Data Archive (SEDA) district-level file — pooled mean test scores by district — from the "get the data" page at edopportunity.org.
+  2. NAEP state-level average scale scores — Grade 8 math, most recent year, all states — from nationsreportcard.gov or its public API.
+  3. Tennessee STAR (Project STAR) student-level data — from the R package AER (data("STAR")) or the Harvard Dataverse CSV. Use the kindergarten math score.
+If one fails to load, quietly substitute a similar public dataset and tell me what you swapped.
+Then, in a few sentences each, tell me what each dataset is: where it came from, what one row represents (one district, one state, or one student), and what the score variable means in everyday terms. Don't show me a table of variable names — just describe it.
 
-STEP 2 — Design choices
-Before plotting anything, ask me to sketch (in words) what I expect the distribution to look like: roughly symmetric? skewed? one bump or several? where's the center?
-Then make three histograms of the same variable with different bin widths (very narrow, "default", very wide). Don't comment on them. Ask me:
-  - What does each version show that the others hide?
-  - Which one would I use if I had to put one in a paper, and why?
-Then vary one more choice (e.g., where the bins start, or log-scaling a skewed variable, or overlaying a density curve) and ask me what changed.
+STEP 2 — What a histogram is
+Explain what a histogram shows: we take one variable, chop its range into equal-width "bins," and count how many rows fall in each bin. Taller bars = more common values. Then make one histogram of the SEDA district mean score using a reasonable default bin width, and walk me through how to read it: point out where most districts sit, whether the bars trail off further on one side than the other, and whether there's one hump or more than one. Define "symmetric," "skewed," and "center" as you go, using the plot in front of me.
+Then ask me one question: "In your own words, what does this picture tell you about how districts compare to each other?"
 
-STEP 3 — Inference
-Now ask me to write 2–3 sentences about what I think is going on in the data, in plain language, before you say anything.
-Only after I've committed, respond: what do you agree with, what would you push back on, and what can a histogram NOT tell me here? (Prompt me to think about: what the unit of observation is, whether outliers are real or errors, whether a bump is a subgroup, and what a histogram can't say about relationships between variables.)
-Then repeat Steps 2–3 with the NAEP state variable, and again with the STAR student-level test score. After the third one, ask me how the level of aggregation (student vs. district vs. state) changed the shape, and why.
+STEP 3 — Bin width
+Explain that bin width is a choice, and that the same data can look different depending on it. Show me the same SEDA variable three ways, side by side if possible: very narrow bins, the default, and very wide bins. For each one, tell me what it reveals and what it hides (e.g., narrow bins show bumps and gaps but look noisy; wide bins look smooth but can erase real features).
+Then ask me: "If you had to put one of these in a report for a school board, which would you pick and why?" Whatever I answer, respond with what's reasonable about my choice and one thing I might not have considered.
 
-Rules for you:
-  - Never give me your interpretation before I've given mine.
-  - If I ask you to "just tell me the answer," refuse and ask a narrower question instead.
-  - Keep a running log of every design decision I made and my stated reason, so I can copy it into my write-up at the end.
+STEP 4 — Looking at a different level
+Now make a histogram of the NAEP state averages. Before showing it, remind me this is only ~50 rows, one per state. Show the plot and explain why a histogram with so few observations looks lumpy and why the bin choice matters even more here. Then show the STAR kindergarten math scores — thousands of students. Point out any features (a floor or ceiling where scores pile up, a long tail) and explain what might cause them.
+Ask me: "The district data, the state data, and the student data all show test scores. Why do you think the shapes look so different?" Give me a hint if I'm stuck: think about what happens to variation when you average many students together.
+
+STEP 5 — What a histogram can and can't tell you
+Summarize in a short list what we learned to look for: center, spread, skew, number of humps, floors/ceilings, outliers. Then explain the limits: a histogram shows one variable at a time, so it can't tell you whether two things are related, and it can't tell you why the shape is the way it is.
+Ask me one last question: "Pick one of the three histograms. Write 2–3 sentences about what it shows, as if explaining it to a friend who hasn't taken this class." Give me brief, encouraging feedback and point out anything I got right that I might not have realized was important.
+
+Finally, give me a short recap of the three plots and my answers so I can bring it to class.
