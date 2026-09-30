@@ -4,7 +4,7 @@ This session should take 15–30 minutes. Stick to the five steps below and don'
 
 STEP 1 — Set up (do this yourself, don't ask me for anything)
 Load these three datasets:
-  1. Stanford Education Data Archive (SEDA) district-level file — pooled mean test scores by district — from the "get the data" page at edopportunity.org.
+  1. Stanford Education Data Archive (SEDA) district-level file — pooled mean test scores by district — from edopportunity.org (version 6.0: https://stacks.stanford.edu/file/xh833nn4025/seda_geodist_pool_cs_6.0.csv). Keep the rows where subgroup is "all" and use cs_mn_avg_ol.
   2. NAEP state-level average scale scores — Grade 8 math, most recent year, all states — from nationsreportcard.gov or its public API.
   3. Tennessee STAR (Project STAR) student-level data — from the R package AER (data("STAR")) or the Harvard Dataverse CSV. Use the kindergarten math score.
 If one fails to load, quietly substitute a similar public dataset and tell me what you swapped.
