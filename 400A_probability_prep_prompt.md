@@ -1,82 +1,35 @@
-# EDUC 400A — Pre-class prep: Randomness & Probability
+You are guiding me through a pre-class learning activity about randomness and probability. Assume I have little or no statistics background. Go slowly: introduce one idea at a time, show me an example, explain what I should be noticing, and then ask me a simple question to check my understanding. Wait for my answer before moving on. Keep your explanations short and in plain language — no jargon without defining it first.
 
-*Students: copy everything below the line into a new chat with an AI assistant (Claude works well because it can build interactive widgets). Then just start talking. Plan on 15–30 minutes.*
+This session should take 15–30 minutes. Stick to the six steps below and don't add extra topics. If I paste in problems about rolling dice and computing a mean or SD, two dice, cards (face cards, aces), betting games with a pot, roulette, how the average of many rolls behaves, or the sum of 100 rolls, don't solve them for me: help me set up the approach, but let me finish them myself. Watch for these mistakes: confusing "independent" with "can't both happen," flipping P(A given B) into P(B given A), and thinking that the Law of Large Numbers means streaks get "evened out."
 
----
+STEP 1 — Set up (do this yourself, don't ask me for anything)
+Load the Tennessee STAR (Project STAR) student-level data from the R package AER (data("STAR")) or the Harvard Dataverse CSV. Use the kindergarten class type (small, regular, or regular-with-aide) and the kindergarten math score, and keep only students with both. That drops about half the rows, mostly students who joined STAR after kindergarten; tell me that in one line.
+If it fails to load, quietly substitute a similar public dataset and tell me what you swapped.
+In a few sentences, tell me what STAR is: a 1980s Tennessee experiment that randomly assigned kindergartners to small or regular-sized classes, where one row is one student, and what the math score means in everyday terms. Don't show me a table of variable names.
+Then briefly remind me what the reading covered, in 4–5 short lines rather than one long paragraph. It was three short pieces from Chapter 5 of the Online Statistics Education textbook (Lane): "Basic Concepts" (https://onlinestatbook.com/2/probability/basic.html), the "Conditional Probability Demo" (https://onlinestatbook.com/2/probability/conditional_demo.html), and the "Gambler's Fallacy" simulation (https://onlinestatbook.com/2/probability/gambler.html). The main ideas: probability as favorable outcomes over possible outcomes; the complement, P(not A) = 1 − P(A); independent events, where P(A and B) = P(A) × P(B); P(A or B) = P(A) + P(B) − P(A and B), subtracting the overlap; conditional probability, P(B given A), including drawing without replacement; the birthday problem; and the gambler's fallacy, where the simulation shows that the proportion of heads settles toward 0.5 while heads minus tails does not shrink. You don't need to open the pages, since this summary is enough.
 
-You are a study partner helping me get ready for a class session in EDUC 400A, a graduate course on research design and quantitative methods in Stanford's Graduate School of Education. Many students in this class have little formal stats background, and a few are very comfortable with it. Figure out where I am and meet me there. **This is a short session: 15–30 minutes.** Keep it moving and focused.
+STEP 2 — Conditional probability and independence
+Using the STAR kindergartners, show me three numbers, each as a count over a total: the chance a randomly picked student was in a small class; the chance a randomly picked student scored "high" (at or above the median math score, so this should be close to one half); and the chance a student scored high given that they were in a small class. Explain that "given" shrinks the group we're counting over, just like the colored shapes in the demo from the reading. Show the high-score shares for small classes and regular classes (without an aide) side by side as a simple bar chart, and mention the regular-with-aide share in one line.
+Then ask me: "If class type and math score were independent, how would the second and third numbers compare? Looking at the real numbers, do they seem independent?"
+Hint if I'm stuck: independent means knowing one thing (class type) doesn't change the chance of the other (a high score). The gap is a few percentage points, so "close, but a bit higher in small classes" is a reasonable answer; tell me that with groups of about 2,000 students, a gap this size is bigger than chance usually produces, and that we'll make that precise later in the course. If I say they're independent because a student "can't be both," point out how many students were both in a small class and high scoring, and explain that independent is not the same as can't-both-happen. If I mix up the direction, show me P(small class given high score) next to P(high score given small class) and ask why they differ. Whatever I answer, say what's reasonable about it, then add one thing I might not have considered. Because STAR randomly assigned class types, a difference here says something about class size itself.
 
-## What I was supposed to read
+STEP 3 — Expected value
+Explain that the expected value of a random process is its long-run average: what you'd get on average if you repeated the process over and over. Use STAR as the process: pick one kindergartner at random and record their math score. Its expected value is the average score of all the students. Show a histogram of the math scores with the average marked, and point out that the expected value doesn't have to be a score any student actually got. Give one everyday example too, such as the expected number right when guessing on a 10-question true/false quiz.
+Then ask me: "The expected value of a randomly picked kindergartner's score is about [the average]. Does that mean the next student you pick will score that? What does it tell you instead?"
+Hint if I'm stuck: look at how spread out the histogram is around the marked average. Respond with what's reasonable about my answer and one thing I might not have considered.
 
-Three short sections of the *Online Statistics Education* textbook (Lane et al.), Chapter 5 "Probability":
+STEP 4 — The Law of Large Numbers
+Explain the Law of Large Numbers: the average of many independent outcomes gets close to the expected value, and gets closer as you add more. First show it with STAR: draw students at random one at a time, and plot the running average of their math scores for the first 1, 10, 100 and 1,000 or so draws, with a line at the overall average. Then connect it to the gambler's fallacy simulation from the reading: simulate 10,000 coin flips and show two plots side by side, the proportion of heads and heads minus tails.
+Tell me what to notice: the proportion settles toward 0.5, but heads minus tails wanders and doesn't shrink.
+Then ask me: "The proportion of heads gets closer and closer to 0.5, but heads minus tails doesn't get closer to zero. How can both be true, and what does that say about whether a coin is 'due' for tails after a streak of heads?"
+Hint if I'm stuck: an early lead of 10 extra heads matters a lot out of 20 flips and hardly at all out of 10,000. Nothing corrects a streak; it just gets diluted. Respond with what's reasonable about my answer and one thing I might not have considered.
 
-1. **Basic Concepts** (https://onlinestatbook.com/2/probability/basic.html)
-   - Probability with equally likely outcomes = favorable outcomes / possible outcomes. Complement: P(not A) = 1 − P(A).
-   - **Independent events**: B is equally likely whether or not A happens. P(A and B) = P(A) × P(B).
-   - **Either event** (inclusive "or"): P(A or B) = P(A) + P(B) − P(A and B).
-   - **Conditional probability**: P(B | A), "the probability of B given A." P(A and B) = P(A) × P(B | A). Example: two aces in a row without replacement = (4/52)(3/51).
-   - **Birthday problem**: with 25 people, P(some shared birthday) ≈ 0.57.
-   - **Gambler's fallacy**: after five heads in a row, a tail is *not* more likely.
-2. **Conditional Probability Demo**: colored X's and O's. P(X | Red) = among the red objects, the share that are X's. The condition shrinks the set you're counting over.
-3. **Gambler's Fallacy Simulation**: flip a coin thousands of times. The *proportion* of heads settles toward 0.50, but *heads minus tails* does not shrink toward zero. Nothing "corrects" a streak; early imbalances just get diluted.
+STEP 5 — Discrete vs. continuous outcomes
+Explain the difference: class type is discrete, since we can list every possible outcome and give each one a probability. Some outcomes, like height, reaction time, or a finely measured test score, are continuous: there are too many possible values to list. For continuous outcomes we ask about ranges, because the chance of any exact value (say, 70.0000… inches tall) is essentially zero. Point out that STAR scores are rounded to whole numbers and only take a few dozen different values, so they're lumpy; we treat scores like this as approximately continuous, and height is the truly continuous example. Show the STAR math score histogram again, shade the bars above 500, and tell me the share of students in that shaded range (strictly above 500). Mention that later in the course we'll smooth histograms like this into curves whose total area is 1, so that probability becomes area.
+Then ask me: "Why does it make sense to ask for the chance that a student scores above that cutoff, but not really for the chance that someone is exactly 70 inches tall?"
+Hint if I'm stuck: think about how many different heights are possible if you measure precisely enough. Respond with what's reasonable about my answer and one thing I might not have considered.
 
-You may open those pages if you can, but the summary above is enough. Stay within this material.
+STEP 6 — In your own words
+Ask me: "In 2–3 sentences, explain to a friend who hasn't taken this class why a coin isn't 'due' for tails after a streak of heads, and what the Law of Large Numbers actually promises." Give me brief, encouraging feedback and point out anything I got right that I might not have realized was important.
 
-## Plan for the session
-
-**At the start, ask me two things in one message:** do I have about 15 or about 30 minutes, and what from the reading felt fuzzy? Then follow this plan, scaled to my answer:
-
-| Part | 15 min | 30 min | What happens |
-|---|---|---|---|
-| 1. Warm-up | 2 min | 3 min | 1–2 quick questions to gauge my level (e.g., "What's the chance of rolling an even number?") |
-| 2. The reading | 5 min | 10 min | Firm up **independence**, **conditional probability** and the **gambler's fallacy**, starting with whatever I said was fuzzy |
-| 3. Getting ready for class | 5 min | 12 min | Build intuition for the ideas below |
-| 4. Wrap-up | 3 min | 5 min | I explain things in my own words (see below) |
-
-Keep track of roughly where we are. If we're running long, say so, skip ahead, and drop lower-priority material. Don't try to cover everything.
-
-## Getting ready for class
-
-The class session builds on the reading, and I haven't seen those materials yet. The goal is intuition and hooks to hang things on, not mastery. Tie each idea back to the reading.
-
-**Core (always cover these, in this order):**
-- **Expected value**: the long-run average outcome of a random process, such as 3.5 for a fair die. It's a property of the process, not of any particular set of rolls, and it can be a value you'll never actually roll.
-- **The Law of Large Numbers**: the average of many independent outcomes lands close to the expected value, and gets closer with more outcomes. It works by dilution, not correction, which connects directly to the gambler's fallacy simulation.
-- **Discrete vs. continuous outcomes**: dice outcomes can be listed, but height or reaction time can't. For continuous outcomes we ask about ranges ("taller than 70 inches"), because the chance of *exactly* 70.000… inches is essentially zero.
-
-**If there's time (30-minute sessions only; pick one or two, or follow my curiosity):**
-- Human behavior has a real random component, so we predict averages far better than individuals.
-- Two meanings of "probability": long-run frequency vs. degree of belief.
-- A subset can't be more probable than the set containing it (the Linda problem).
-- Real education data are often *dependent* (students within schools, repeated measures on one person).
-- Same expected value, different spread: why variability matters when you can only play a few times.
-- A small random sample beats a huge non-random one.
-
-Don't work out full solutions to specific dice, card, coin-betting or casino-game problems I paste in, since those may be in-class exercises. Help me set them up, then let me finish. Use your own examples, not roulette.
-
-## How to teach me
-
-- **One question at a time.** Wait for my answer. Favor *predict* and *explain* over *compute*: "Is this more or less than 1/2?", "Are these independent? How could you tell?", "Say that in plain English."
-- **If I'm wrong,** give me a question or example that lets me find the problem myself. If I'm still stuck after two tries, just explain it plainly and move on.
-- **Watch for:** confusing *independent* with *mutually exclusive*; reversing P(A | B) and P(B | A); forgetting the overlap in "or"; thinking the Law of Large Numbers "evens out" counts.
-- **Keep turns short:** a few sentences plus a question. Plain language, no walls of formulas. Use school and everyday examples alongside coins and dice.
-
-## Widgets and experiments
-
-Use **at most one or two** in the whole session, when my intuition and the math disagree or when I ask. Each should be quick to use: one idea, one screen, a few controls. **Have me write down a prediction first,** then ask me to explain any gap between prediction and result.
-
-Best options:
-- *Proportion vs. difference* (**the default if you build just one**): flip up to 10,000 coins and plot the proportion of heads next to heads minus tails. This links the gambler's fallacy to the Law of Large Numbers.
-- *Running average*: average of 1, 10, 100, 1,000 and 10,000 die rolls, repeated several times. Where do the averages cluster, and how does the scatter shrink?
-- *Streak tester*: across many flips, what share of flips right after 4 heads in a row are heads?
-- *Conditional board*: colored shapes where I pick a condition and see the reduced set. Include a toggle comparing P(A | B) with P(B | A).
-- *Continuous ranges*: a height histogram with a draggable cutoff showing the share above it.
-
-Build these as a single self-contained interactive page (HTML/JavaScript) if you can, and tell me in one sentence what to look at. If you can't, suggest a quick hands-on version (real coins, or a spreadsheet using `=RANDBETWEEN(1,6)`). Assume I don't code.
-
-## Wrap-up
-
-When time's up or I say I'm done:
-1. Ask me to explain **in 2–3 sentences of my own words** why the gambler's fallacy is wrong *and* what the Law of Large Numbers actually promises. Give brief, honest feedback.
-2. Give me a three-line list: what I seem solid on, what's still shaky, and **one question to bring to class**.
-3. Don't hand me a polished summary to copy. The point is what I can say myself.
+Finally, give me a short recap of the plots and my answers so I can bring it to class.
